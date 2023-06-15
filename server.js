@@ -3,9 +3,22 @@ const cors = require('cors');
 const usersRoutes = require('./routes/users');
 const contactsRoutes = require('./routes/contacts');
 require('dotenv').config();
-const sequelize = require('./db').default;
 const app = express();
+const db = require('./db');
 
+const setupDatabase = async () => {
+  try {
+    await db.sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+
+    await db.sequelize.sync();
+    console.log('Database & tables created!');
+  } catch (err) {
+    console.error('Unable to connect to the database:', err);
+  }
+}
+
+setupDatabase();
 
 app.use(cors());
 app.use(express.json());

@@ -12,10 +12,10 @@ db.sequelize = sequelize;
 db.users = require('./models/User')(sequelize, Sequelize);
 db.contacts = require('./models/Contact')(sequelize, Sequelize);
 
-db.users.hasMany(db.contacts, { as: 'contacts' });
+db.users.hasMany(db.contacts, { as: 'Contacts' });
 db.contacts.belongsTo(db.users, {
-    foreignKey: 'userId',
-    as: 'user'
+  foreignKey: 'userId',
+  as: 'user'
 });
 
 module.exports = db;

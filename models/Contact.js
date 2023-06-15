@@ -26,9 +26,6 @@ module.exports = (sequelize, Sequelize) => {
     }, {
     });
 
-    Contact.belongsTo(User, {
-        foreignKey: 'userId',
-        as: 'user'
-    });
+    return Contact;
 
 };

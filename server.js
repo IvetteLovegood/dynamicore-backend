@@ -4,7 +4,7 @@ const usersRoutes = require('./routes/users');
 const contactsRoutes = require('./routes/contacts');
 require('dotenv').config();
 const app = express();
-const db = require('./db');
+const db = require('./db').default;
 
 const setupDatabase = async () => {
   try {

@@ -9,11 +9,11 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.users = require('./models/User')(sequelize, Sequelize);
+db.user = require('./models/User')(sequelize, Sequelize);
 db.contacts = require('./models/Contact')(sequelize, Sequelize);
 
-db.users.hasMany(db.contacts, { as: 'Contacts' });
-db.contacts.belongsTo(db.users, {
+db.user.hasMany(db.contacts, { as: 'Contacts' });
+db.contacts.belongsTo(db.user, {
   foreignKey: 'userId',
   as: 'user'
 });

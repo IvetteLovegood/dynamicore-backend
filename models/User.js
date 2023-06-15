@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const sequelize = require('../db');
+const sequelize = require('../db').default;
 
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define('User', {

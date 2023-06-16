@@ -23,6 +23,12 @@ exports.getUser = async (req, res, next) => {
 
 exports.createUser = async (req, res, next) => {
     try {
+        const { email } = req.body;
+        const existingUser = await db.users.findOne({ where: { email } });
+        if (existingUser) {
+            return res.status(400).json({ error: 'El correo electrónico ya está en uso. Por favor, use otro correo electrónico.' });
+        }
+
         const newUser = await db.users.create(req.body);
         res.json(newUser);
     } catch (error) {

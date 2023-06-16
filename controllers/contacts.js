@@ -11,9 +11,7 @@ exports.getContacts = async (req, res, next) => {
 
 exports.getContact = async (req, res, next) => {
     try {
-        const { userId } = req.params;
-        console.log(userId)
-        const contact = await db.contacts.findAll({ where: { userId: idUser } });
+        const contact = await db.contacts.findAll({ where: { idUser: req.params.id } });
         if (!contact) {
             return res.status(404).json({ error: 'Contacto no encontrado' });
         }

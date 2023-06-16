@@ -4,7 +4,7 @@ const contactController = require('../controllers/contacts');
 
 /**
  * @swagger
- * /contacts:
+ * /api/contacts:
  *   get:
  *     summary: Retrieve a list of contacts
  *     responses:
@@ -15,7 +15,7 @@ router.get('/', contactController.getContacts);
 
 /**
  * @swagger
- * /contacts/{id}:
+ * /api/contacts/{id}:
  *   get:
  *     summary: Retrieve a single contact by ID
  *     parameters:
@@ -31,7 +31,7 @@ router.get('/:id', contactController.getContact);
 
 /**
  * @swagger
- * /contacts:
+ * /api/contacts:
  *   post:
  *     summary: Create a new contact
  *     responses:
@@ -42,7 +42,7 @@ router.post('/', contactController.createContact);
 
 /**
  * @swagger
- * /contacts/{id}:
+ * /api/contacts/{id}:
  *   put:
  *     summary: Update a contact by ID
  *     parameters:
@@ -58,7 +58,7 @@ router.put('/:id', contactController.updateContact);
 
 /**
  * @swagger
- * /contacts/{id}:
+ * /api/contacts/{id}:
  *   delete:
  *     summary: Delete a contact by ID
  *     parameters:

@@ -4,7 +4,7 @@ const userController = require('../controllers/users');
 
 /**
  * @swagger
- * /users:
+ * /api/users:
  *   get:
  *     summary: Retrieve a list of users
  *     responses:
@@ -15,7 +15,7 @@ router.get('/', userController.getUsers);
 
 /**
  * @swagger
- * /users/{id}:
+ * /api/users/{id}:
  *   get:
  *     summary: Retrieve a single user by ID
  *     parameters:
@@ -31,7 +31,7 @@ router.get('/:id', userController.getUser);
 
 /**
  * @swagger
- * /users:
+ * /api/users:
  *   post:
  *     summary: Create a new user
  *     responses:
@@ -42,7 +42,7 @@ router.post('/', userController.createUser);
 
 /**
  * @swagger
- * /users/{id}:
+ * /api/users/{id}:
  *   put:
  *     summary: Update a user by ID
  *     parameters:
@@ -58,7 +58,7 @@ router.put('/:id', userController.updateUser);
 
 /**
  * @swagger
- * /users/{id}:
+ * /api/users/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     parameters:
@@ -73,7 +73,7 @@ router.delete('/:id', userController.deleteUser);
 
 /**
  * @swagger
- * /users/login:
+ * /api/users/login:
  *   post:
  *     summary: Login a user
  *     responses:

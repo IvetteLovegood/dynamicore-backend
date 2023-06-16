@@ -14,7 +14,6 @@ db.contacts = require('./models/Contact')(sequelize, Sequelize);
 
 db.user.hasMany(db.contacts, { as: 'Contacts' });
 db.contacts.belongsTo(db.user, {
-  foreignKey: 'userId',
   as: 'user'
 });
 

@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const db = require('../db');
 
 exports.getUsers = async (req, res, next) => {
@@ -23,14 +25,22 @@ exports.getUser = async (req, res, next) => {
 
 exports.createUser = async (req, res, next) => {
     try {
-        const { email } = req.body;
+        const { email, password } = req.body;
         const existingUser = await db.users.findOne({ where: { email } });
         if (existingUser) {
             return res.status(400).json({ error: 'El correo electrónico ya está en uso. Por favor, use otro correo electrónico.' });
         }
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const newUser = await db.users.create({ ...req.body, password: hashedPassword });
+        const payload = {
+            user: {
+                id: newUser.id
+            }
+        };
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        const newUser = await db.users.create(req.body);
-        res.json(newUser);
+        res.json({ token, user: newUser });
     } catch (error) {
         next(error);
     }
@@ -57,3 +67,30 @@ exports.deleteUser = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.loginUser = async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
+        const user = await db.users.findOne({ where: { email } });
+        if (!user) {
+            return res.status(400).json({ error: 'Correo electrónico o contraseña incorrectos.' });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ error: 'Correo electrónico o contraseña incorrectos.' });
+        }
+
+        const payload = {
+            user: {
+                id: user.id
+            }
+        };
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        res.json({ token, user });
+    } catch (error) {
+        next(error);
+    }
+};
+

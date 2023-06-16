@@ -1,5 +1,6 @@
-const Contact = require('../models/Contact');
-const User = require('../models/User');
+const db = require('../db');
+const User = db.users;
+const Contact = db.contacts;
 
 exports.getContacts = async (req, res, next) => {
     try {

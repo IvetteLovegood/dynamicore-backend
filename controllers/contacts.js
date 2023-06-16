@@ -56,17 +56,14 @@ exports.updateContact = async (req, res, next) => {
 
 exports.deleteContact = async (req, res, next) => {
     try {
-        const { userId, id } = req.params;
-        const user = await db.users.findByPk(userId);
-        if (!user) {
-            return res.status(404).json({ error: 'Usuario no encontrado' });
-        }
-        const contact = await db.contacts.findOne({ where: { id, userId } });
+        const { id } = req.params;
+
+        const contact = await db.contacts.findOne({ where: { id } });
         if (!contact) {
             return res.status(404).json({ error: 'Contacto no encontrado' });
         }
         await db.contacts.destroy({
-            where: { id, userId }
+            where: { id }
         });
         res.json({ success: 'Contacto eliminado exitosamente' });
     } catch (error) {

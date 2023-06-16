@@ -27,7 +27,7 @@ module.exports = (sequelize, Sequelize) => {
             }
         }
     }, {
-        tableName: 'Contacts', // 'contacts' es el nombre de la tabla de contactos
+        tableName: 'Contacts',
     });
 
     return Contact;

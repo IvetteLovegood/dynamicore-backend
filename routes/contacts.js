@@ -93,24 +93,3 @@ router.put('/:id', contactController.updateContact);
 router.delete('/:id', contactController.deleteContact);
 
 module.exports = router;
-
-/**
- * @swagger
- * definitions:
- *   Contact:
- *     type: object
- *     required:
- *       - name
- *       - email
- *     properties:
- *       id:
- *         type: integer
- *       name:
- *         type: string
- *       email:
- *         type: string
- *       phone:
- *         type: string
- *       idUser:
- *         type: integer
- */

@@ -115,23 +115,3 @@ router.delete('/:id', userController.deleteUser);
 router.post('/login', userController.loginUser);
 
 module.exports = router;
-
-/**
- * @swagger
- * definitions:
- *   User:
- *     type: object
- *     required:
- *       - name
- *       - email
- *       - password
- *     properties:
- *       id:
- *         type: integer
- *       name:
- *         type: string
- *       email:
- *         type: string
- *       password:
- *         type: string
- */

@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
     swaggerDefinition: {
       info: {
@@ -8,5 +10,5 @@ module.exports = {
         }
     }
     },
-    apis: ['../server.js']
-  };
+    apis: [path.resolve(__dirname, './routes/*.js')],
+};

@@ -5,7 +5,6 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     dialect: 'mysql'
 });
 
-
 const db = {};
 
 db.Sequelize = Sequelize;

@@ -10,7 +10,6 @@ const setupDatabase = async () => {
   try {
     await db.sequelize.authenticate();
     console.log('Connection has been established successfully.');
-
     await db.sequelize.sync();
     console.log('Database & tables created!');
   } catch (err) {

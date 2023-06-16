@@ -2,12 +2,12 @@ const db = require('../db');
 
 exports.getContacts = async (req, res, next) => {
     try {
-        const { userId } = req.params;
-        const user = await db.users.findByPk(userId);
+        const { idUser } = req.params;
+        const user = await db.users.findByPk(idUser);
         if (!user) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
-        const contacts = await db.contacts.findAll({ where: { userId } });
+        const contacts = await db.contacts.findAll({ where: { idUser } });
         res.json(contacts);
     } catch (error) {
         next(error);
@@ -16,12 +16,12 @@ exports.getContacts = async (req, res, next) => {
 
 exports.getContact = async (req, res, next) => {
     try {
-        const { userId, id } = req.params;
-        const user = await db.users.findByPk(userId);
+        const { idUser, id } = req.params;
+        const user = await db.users.findByPk(idUser);
         if (!user) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
-        const contact = await db.contacts.findOne({ where: { id, userId } });
+        const contact = await db.contacts.findOne({ where: { id, idUser } });
         if (!contact) {
             return res.status(404).json({ error: 'Contacto no encontrado' });
         }
@@ -33,12 +33,13 @@ exports.getContact = async (req, res, next) => {
 
 exports.createContact = async (req, res, next) => {
     try {
-        const { userId, ...contactData } = req.body;
-        const user = await db.users.findByPk(userId);
+        const { idUser, ...contactData } = req.body;
+        console.log(req.body)
+        const user = await db.users.findByPk(idUser);
         if (!user) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
-        const newContact = await db.contacts.create({ ...contactData, userId });
+        const newContact = await db.contacts.create({ ...contactData, idUser: idUser });
         res.json(newContact);
     } catch (error) {
         next(error);
@@ -47,17 +48,17 @@ exports.createContact = async (req, res, next) => {
 
 exports.updateContact = async (req, res, next) => {
     try {
-        const { userId, id } = req.params;
-        const user = await db.users.findByPk(userId);
+        const { idUser, id } = req.params;
+        const user = await db.users.findByPk(idUser);
         if (!user) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
-        const contact = await db.contacts.findOne({ where: { id, userId } });
+        const contact = await db.contacts.findOne({ where: { id, idUser } });
         if (!contact) {
             return res.status(404).json({ error: 'Contacto no encontrado' });
         }
         await db.contacts.update(req.body, {
-            where: { id, userId }
+            where: { id, idUser }
         });
         res.json({ success: 'Contacto actualizado exitosamente' });
     } catch (error) {
@@ -67,17 +68,17 @@ exports.updateContact = async (req, res, next) => {
 
 exports.deleteContact = async (req, res, next) => {
     try {
-        const { userId, id } = req.params;
-        const user = await db.users.findByPk(userId);
+        const { idUser, id } = req.params;
+        const user = await db.users.findByPk(idUser);
         if (!user) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
-        const contact = await db.contacts.findOne({ where: { id, userId } });
+        const contact = await db.contacts.findOne({ where: { id, idUser } });
         if (!contact) {
             return res.status(404).json({ error: 'Contacto no encontrado' });
         }
         await db.contacts.destroy({
-            where: { id, userId }
+            where: { id, idUser }
         });
         res.json({ success: 'Contacto eliminado exitosamente' });
     } catch (error) {

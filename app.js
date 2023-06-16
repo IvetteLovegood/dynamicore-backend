@@ -26,11 +26,13 @@ setupDatabase();
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/users', usersRoutes);
-app.use('/api/contacts', contactsRoutes);
+
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+app.use('/api/users', usersRoutes);
+app.use('/api/contacts', contactsRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

@@ -5,8 +5,8 @@ module.exports = {
         description: 'Documentación de la API de Dynamicore',
         contact: {
           name: 'Soporte de Dynamicore'
-        }      
+        }
     }
     },
-    apis: ['../routes/*.js']
+    apis: ['../server.js']
   };

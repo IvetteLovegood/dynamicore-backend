@@ -5,6 +5,7 @@ const usersRoutes = require('./routes/users');
 const contactsRoutes = require('./routes/contacts');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const swaggerOptions = require('./config/swaggerOptions');
 
 require('dotenv').config();
 const db = require('./db');
@@ -28,22 +29,13 @@ app.use(express.json());
 app.use('/api/users', usersRoutes);
 app.use('/api/contacts', contactsRoutes);
 
-const swaggerOptions = {
-  swaggerDefinition: {
-    info: {
-      title: 'API de Dynamicore',
-      description: 'Documentación de la API de Dynamicore',
-      contact: {
-        name: 'Soporte de Dynamicore'
-      },
-      servers: ['http://localhost:8000/']
-    }
-  },
-  apis: ['server.js']
-};
-
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Cachando el error!');
+});
 
 const PORT = process.env.PORT || 8000;
 

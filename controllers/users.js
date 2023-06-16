@@ -1,8 +1,8 @@
-const User = require('../models/User');
+const db = require('../db');
 
 exports.getUsers = async (req, res, next) => {
     try {
-        const users = await User.findAll();
+        const users = await db.users.findAll();
         res.json(users);
     } catch (error) {
         next(error);
@@ -11,7 +11,7 @@ exports.getUsers = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
     try {
-        const user = await User.findByPk(req.params.id);
+        const user = await db.users.findByPk(req.params.id);
         if (!user) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
@@ -23,7 +23,7 @@ exports.getUser = async (req, res, next) => {
 
 exports.createUser = async (req, res, next) => {
     try {
-        const newUser = await User.create(req.body);
+        const newUser = await db.users.create(req.body);
         res.json(newUser);
     } catch (error) {
         next(error);
@@ -32,7 +32,7 @@ exports.createUser = async (req, res, next) => {
 
 exports.updateUser = async (req, res, next) => {
     try {
-        await User.update(req.body, {
+        await db.users.update(req.body, {
             where: { id: req.params.id }
         });
         res.json({ success: 'Usuario actualizado correctamente' });
@@ -43,7 +43,7 @@ exports.updateUser = async (req, res, next) => {
 
 exports.deleteUser = async (req, res, next) => {
     try {
-        await User.destroy({
+        await db.users.destroy({
             where: { id: req.params.id }
         });
         res.json({ success: 'Usuario eliminado correctamente' });

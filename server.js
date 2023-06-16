@@ -3,9 +3,7 @@ const app = express();
 const cors = require('cors');
 const usersRoutes = require('./routes/users');
 const contactsRoutes = require('./routes/contacts');
-
 require('dotenv').config();
-
 const db = require('./db');
 
 const setupDatabase = async () => {

@@ -1,6 +1,3 @@
-const { Sequelize } = require('sequelize');
-const sequelize = require('../db');
-
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define('User', {
         name: {

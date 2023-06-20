@@ -65,10 +65,12 @@ router.put('/:id', userController.updateUser);
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID of the user*     responses:
+ *         description: ID of the user
+ *     responses:
  *       200:
  *         description: The deleted user
  */
+
 router.delete('/:id', userController.deleteUser);
 
 /**

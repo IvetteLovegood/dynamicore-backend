@@ -36,7 +36,7 @@ app.use('/api/contacts', contactsRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Cachando el error!');
+  res.status(500).send('error');
 });
 
 const PORT = process.env.PORT || 8000;

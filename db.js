@@ -14,6 +14,6 @@ db.users = require('./models/User')(sequelize, Sequelize);
 db.contacts = require('./models/Contact')(sequelize, Sequelize.DataTypes);
 
 db.users.hasMany(db.contacts, { as: 'Contacts' });
-db.contacts.belongsTo(db.users, { foreignKey: 'idUser', as: 'User' });
+db.contacts.belongsTo(db.users, { foreignKey: 'idUser', as: 'User', onDelete: 'CASCADE' });
 
 module.exports = db;
